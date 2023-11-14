@@ -20,7 +20,6 @@ public class ResponseRest {
 		map.put("date", date);
 		metadata.add(map);
 
-
 	}
 
 }
