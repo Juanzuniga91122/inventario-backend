@@ -139,7 +139,7 @@ public class CategoryServiceImpl implements ICategoryService {
 					response.setMetadata("Respuesta nok", "-1", "Categoria no actualizada");
 					return new ResponseEntity<CategoryResponseRest>(response, HttpStatus.BAD_REQUEST);
 				}
-				
+
 			} else {
 				response.setMetadata("Respuesta nok", "-1", "Categoria no encontrtada");
 				return new ResponseEntity<CategoryResponseRest>(response, HttpStatus.NOT_FOUND);
@@ -153,6 +153,29 @@ public class CategoryServiceImpl implements ICategoryService {
 		}
 
 		return new ResponseEntity<CategoryResponseRest>(response, HttpStatus.OK);
+	}
+
+	@Override
+	@Transactional
+	public ResponseEntity<CategoryResponseRest> deleteById(Long id) {
+		// TODO Auto-generated method stub
+		CategoryResponseRest response = new CategoryResponseRest();
+
+		try {
+
+			categoryDao.deleteById(id);
+			response.setMetadata("respuesta ok", "00", "Registro eliminado");
+
+		} catch (Exception e) {
+
+			response.setMetadata("Respuesta nok", "-1", "Error al eliminar");
+			e.getStackTrace();
+			return new ResponseEntity<CategoryResponseRest>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+
+		}
+
+		return new ResponseEntity<CategoryResponseRest>(response, HttpStatus.OK);
+
 	}
 
 }
